@@ -50,8 +50,8 @@
         
         utcTime = DateTime.UtcNow.ToString("HH:mm:ss");
         localTime = DateTime.Now.ToString("HH:mm:ss");
-        CountDownText = $"Next monster refresh in: {(nextTime - DateTime.UtcNow.TimeOfDay).ToString(@"hh\:mm\:ss")}";
-        WorldCountDownText = $"Next biome refresh in: {(DateTime.UtcNow.Date.AddDays(1) - DateTime.UtcNow.TimeOfDay).ToString(@"hh\:mm\:ss")}";
+        CountDownText = $"Next monster refresh in: {(nextTime - DateTime.UtcNow.TimeOfDay):hh\\:mm\\:ss}";
+        WorldCountDownText = $"Next biome refresh in: {(DateTime.UtcNow.Date.AddDays(1) - DateTime.UtcNow ):hh\\:mm\\:ss}";
         Console.WriteLine(CountDownText);
         await InvokeAsync(StateHasChanged);
     }
