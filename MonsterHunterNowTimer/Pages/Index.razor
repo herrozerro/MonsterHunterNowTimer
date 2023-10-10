@@ -40,7 +40,7 @@
     {
         var startHour = DateTime.UtcNow.Hour;
         var nextRefreshHour = _monsterHunterRefreshTimesUTC.FirstOrDefault(x => x > startHour);
-        nextTime = new TimeSpan(nextRefreshHour, 0, 0);
+        nextTime = new TimeSpan(nextRefreshHour, 0, 0).Add(new TimeSpan(nextRefreshHour == 0 ? 1 : 0,0,0,0));
     }
     
     private async void OnTimedEvent(object? sender, ElapsedEventArgs e)
@@ -52,7 +52,7 @@
         localTime = DateTime.Now.ToString("HH:mm:ss");
         CountDownText = $"Next monster refresh in: {(nextTime - DateTime.UtcNow.TimeOfDay):hh\\:mm\\:ss}";
         WorldCountDownText = $"Next biome refresh in: {(DateTime.UtcNow.Date.AddDays(1) - DateTime.UtcNow ):hh\\:mm\\:ss}";
-        Console.WriteLine(CountDownText);
+        Console.WriteLine($"{nextTime}");
         await InvokeAsync(StateHasChanged);
     }
 
